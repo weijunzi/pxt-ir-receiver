@@ -23,7 +23,6 @@ ReceiverIR::ReceiverIR(PinName rxpin) : evt(rxpin) {
     evt.rise(this, &ReceiverIR::isr_rise);
     evt.mode(PullUp);
     ticker.attach_us(this, &ReceiverIR::isr_wdt, 10 * 1000);
-    printf("ISRs attached\r\n");
 }
 
 /**
