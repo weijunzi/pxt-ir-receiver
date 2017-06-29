@@ -42,8 +42,8 @@ enum class RemoteButton {
 //% color=50 weight=80
 //% icon="\uf1eb"
 namespace IR { 
-  map<uint8_t, vA> actions;
-  map<uint8_t, uint32_t> lastact;
+  map<RemoteButton, vA> actions;
+  map<RemoteButton, uint32_t> lastact;
   Timer tsb; 
   uint8_t buf[32];
   uint32_t now;
@@ -55,7 +55,7 @@ namespace IR {
   */
   //% blockId=ir_received_left_event
   //% block="on |%btn| button pressed"
-  void onPressEvent(int btn, Action body) {
+  void onPressEvent(RemoteButton btn, Action body) {
     //if(actions.find(btn) == actions.end()) actions[btn] = new vector();
     actions[btn].push_back(body);
   }
@@ -64,11 +64,11 @@ namespace IR {
 
   void onReceivable(){
     int x = rx->getData(&fmt, buf, 32 * 8);
-    if(actions.find(buf[2]) == actions.end()) return;
+    if(actions.find((RemoteButton)buf[2]) == actions.end()) return;
     now = tsb.read_ms();
-    if(now - lastact[buf[2]] < 100) return;
-    lastact[buf[2]] = now;
-    cA(actions[buf[2]]); 
+    if(now - lastact[(RemoteButton)buf[2]] < 100) return;
+    lastact[(RemoteButton)buf[2]] = now;
+    cA(actions[(RemoteButton)buf[2]]); 
   }
 
   void monitorIR(){
