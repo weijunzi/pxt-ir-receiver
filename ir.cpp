@@ -29,14 +29,16 @@ enum class Pins{
 
 enum class RemoteButton { //testing for changes
   Power = 0x0
- /* Up = 0x5,
+   /**
+  * Up = 0x5,
   Left = 0x8,
   Right = 0xA,
   Down = 0xD,
   OK = 0x9,
   Plus = 0x4,
   Minus = 0xC,
-  Back = 0x6*/
+  Back = 0x6 
+  */
 };
 
 //% color=50 weight=80
